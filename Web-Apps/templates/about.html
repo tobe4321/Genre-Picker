@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Genre Picker</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static',filename='fonts/font-awesome.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='fonts/ionicons.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+  <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+</head>
+
+<body>
+  <div class="header">
+    <nav class="navbar navbar-dark bg-warning navbar-expand-md navigation-clean-search">
+      <div class="container-fluid"><a class="navbar-brand" href="/">ジャンルピッカー</a>
+        <ul class="nav navbar-nav">
+          <li class="nav-item active" role="presentation"><a class="nav-link" href="/about">About</a></li>
+          {% if not current_user.is_authenticated %}
+          <li class="nav-item" role="presentation"><a class="nav-link" href="/register" data-toggle="modal" data-target="#exampleModal">Register</a></li>
+          <li class="nav-item" role="presentation"><a class="nav-link" href="/login">Login</a></li>
+          {% endif %}
+          {% if current_user.is_authenticated %}
+          <li class="nav-item" role="presentation"><a class="nav-link" href="/profile">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <div class="container">
+    <div class="row">
+      <div class="col pt-3">
+        <h1>About</h1>
+        <p>
+          The website functions as a quiz, it asks the user 5 questions that they answer with pre-made options. 1 of the questions and a big part of what type of music you’ll usually get is your astrological sign. Other questions are things like your
+          age or what mood you are in. After you submit your answers the website will return the recommended genre of music for you to listen to. You should also be able to register/login and then be able to see your past results.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col pt-3">
+        <h1>Motivation</h1>
+        <p>
+          I wanted to do something different, but it also took me a while to find out what I WANTED to do. The circumstances of the coronavirus and me being forced to work alone also hampered my creative process a little bit, what I originally wanted
+          to do was to make a website and connect it to an API that could allow you to get your daily horoscopes but after I saw that you had to pay for that I decided to change my mind. Then I wanted to do something like a personality test but then
+          I thought that would take entirely too long for me to do all while working on 2 other websites for 2 other classes. For this project I decided to combine the horoscopes and personality test with music. My idea for this project was to expand
+          people’s consumption of music. Something I’ve always noticed since I got to college is that people all listen to the same things, but they don’t usually all listen because they want to. There are a lot of people out there that like to
+          follow the crowd when it comes to music and I thought that this would be a fun thing for people to do and also expand their horizons.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3 pt-3">
+        <h1>Meet the Team</h1>
+        <figure>
+          <img src="/static/img/team.jpg" alt="myself" width="300" height="500px" style="object-fit: cover;">
+        </figure>
+        <figcaption></figcaption>
+      </div>
+      <div class="col pt-3">
+      </div>
+      <div class="col-3 pt-3">
+        <h1>Resources Used</h1>
+        <ul>
+          <li>Bootstrap</li>
+          <li>Flask</li>
+          <li>Flask Frameworks -> SQLAlchemy, Flask-Login</li>
+          <li>Spotify</li>
+          <li><a href="https://www.yourtango.com/2018314402/what-music-you-love-most-according-zodiac-sign-astrology" target="_blank">Astrology</a></li>
+        </ul>
+        <p>
+          Toheeb Bakare is from Durham, NC and is currently a senior at East Carolina University studying computer science. He likes to think of himself as a sophisticated individual that can vibe to every genre of music. His skills in web design
+          made this website possible. Also lots of googling, trial and error, and all nighters.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Register to save your results</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/about" method="post">
+            <p>
+              <label for="username">Username:</label>
+              <input type="text" name="username" value="">
+            </p>
+            <p>
+              <label for="password">Password:</label>
+              <input type="password" name="password" value="">
+            </p>
+            <button type="submit" class="btn btn-success">Register</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

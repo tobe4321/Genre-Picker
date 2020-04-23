@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Genre Picker</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="{{ url_for('static',filename='fonts/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='fonts/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+    <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <nav class="navbar navbar-dark bg-success navbar-expand-md navigation-clean-search">
+                <div class="container-fluid"><a class="navbar-brand" href="/">ジャンルピッカー</a>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="/about">About</a></li>
+                        </ul>
+                    </div>
+            </nav>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+              {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="container pt-5">
+              <div class="row">
+                <div class="col d-flex justify-content-center mx-auto">
+                  <div class="card card-block w-25">
+                    <div class="card-body">
+                  <form class="" action="/login" method="post">
+                    <p>
+                      <label for="username">Username:</label>
+                      <input type="text" name="username" value="">
+                    </p>
+                    <p>
+                      <label for="password">Password:</label>
+                      <input type="password" name="password" value="">
+                    </p>
+                    <button type="submit" class="btn btn-success">Login</button>
+                  </form>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              </div>
